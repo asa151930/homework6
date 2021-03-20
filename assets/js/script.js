@@ -2,8 +2,8 @@
 $(document).ready(function () {
     var searchHistoryOfContainer = $('#prev-search');
     var searchForm = $('#search-form');
-    var apiKey = '';
-    var baseURL = '';
+    var apiKey = '564ecbbf68c5305bd1631046fcfc2982';
+    var baseURL = 'https://api.openweathermap.org/data/2.5/weather?';
 
     //WHEN I search for a city
     searchForm.submit(function (event) {
@@ -20,12 +20,21 @@ $(document).ready(function () {
         console.log(formValues, city);
         // Real value received from form submission
         searchForUserInput(city);
-        
+
     });
 
-    
-    function searchForUserInput(city) { 
-        console.log(city);
+
+    function searchForUserInput(city) {
+        var fullURL = baseURL + "q=" + city + "&appid=" + apiKey;
+        console.log(baseURL);
+        fetch(fullURL).then(function (response) {
+            return response.json();
+        })
+            .then(function (data) {
+                console.log(data);
+            });
+
     }
 
+    // API needs to be connected
 });

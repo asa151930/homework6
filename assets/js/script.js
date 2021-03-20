@@ -12,7 +12,20 @@ $(document).ready(function () {
         var formValues = $(this).serializeArray(); // $(this) form that just submitted
         //console.log(formValues);
         var city = formValues[0].value; // 0 cause entering only one value
+
+        // SELECTING THE DIV CLASS FOR JQUERY SELECTORS
+        var searchTermDiv = $('<div class="prev-search">');
+        searchTermDiv.text(city);
+        searchHistoryOfContainer.append(searchTermDiv);
         console.log(formValues, city);
+        // Real value received from form submission
+        searchForUserInput(city);
+        
     });
+
+    
+    function searchForUserInput(city) { 
+        console.log(city);
+    }
 
 });

@@ -1,9 +1,18 @@
-// 564ecbbf68c5305bd1631046fcfc2982
-console.log("Hello World");
 
-$(document).ready(function () {   // document is the object
-    //GIVEN a weather dashboard with form inputs
+$(document).ready(function () {
+    var searchHistoryOfContainer = $('#prev-search');
+    var searchForm = $('#search-form');
+    var apiKey = '';
+    var baseURL = '';
+
     //WHEN I search for a city
-    //THEN I am presented with current and future conditions for that city and that city is added to the search history
+    searchForm.submit(function (event) {
+        event.preventDefault();
+        //console.log(event);
+        var formValues = $(this).serializeArray(); // $(this) form that just submitted
+        //console.log(formValues);
+        var city = formValues[0].value; // 0 cause entering only one value
+        console.log(formValues, city);
+    });
 
 });

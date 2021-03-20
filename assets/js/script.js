@@ -51,7 +51,7 @@ $(document).ready(function () {
                 var citywindDiv = $('<div class="wind-name">');
                 cityNameDiv.text("City: " + cityName);
                 cityTempDiv.text("Temperature: " + temp + " F");
-                cityhumidityDiv.text("Humidity: " + humidity + " %");
+                cityhumidityDiv.text("Humidity: " + humidity + "%");
                 citywindDiv.text("Wind Speed: " + wind.speed + " MPH");
 
                 currentContainer.append(cityNameDiv);

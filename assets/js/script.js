@@ -2,10 +2,10 @@
 $(document).ready(function () {
     var searchHistoryOfContainer = $('#prev-search');
     var searchForm = $('#search-form');
-    var apiKey = '564ecbbf68c5305bd1631046fcfc2982';
+    var apiKey = '';
     var first_URL = 'https://api.openweathermap.org/data/2.5/weather?';
     var second_URL = 'https://api.openweathermap.org/data/2.5/forecast?';
-    var first_IconURL = '';
+    var first_IconURL = 'http://openweathermap.org/img/wn/';
     
     var currentWeatherContainer = $('#current-weather');
     var fiveDayWeatherContainer = $('#five-day-weather-forecast');
@@ -91,6 +91,7 @@ $(document).ready(function () {
                     var temp = forcast.main.temp;
                     var weather = forcast.weather;
                     var wind = forcast.wind;
+                    var iconURL = first_IconURL + weather[0].icon + '.png';
                     var humidity = forcast.main.humidity;
                     var day = moment(forcast.dt_txt).format('dddd, MMMM Do');
                     console.log(forcast, temp, humidity, weather, wind, day);
@@ -99,16 +100,18 @@ $(document).ready(function () {
                     var nameDiv = $('<div class="city-name">');
                     var tempDiv = $('<div class="temp-name">');
                     var humidityDiv = $('<div class="humidity-name">');
-                    var cityweatherDiv = $('<div class="weather-name">');
+                    var weatherDiv = $('<img class="icon-name" />');
                     var windDiv = $('<div class="wind-name">');
                     dayDiv.text(day);
 
                     nameDiv.text("City: " + cityName);
+                    weatherDiv.attr('src', iconURL);
                     tempDiv.text("Temperature: " + temp + " F");
                     humidityDiv.text("Humidity: " + humidity + "%");
                     windDiv.text("Wind Speed: " + wind.speed + " MPH");
 
                     rowDiv.append(dayDiv);
+                    rowDiv.append(weatherDiv);
                     rowDiv.append(tempDiv);
                     rowDiv.append(humidityDiv);
                     rowDiv.append(windDiv);

@@ -6,6 +6,7 @@ $(document).ready(function () {
     var first_URL = 'https://api.openweathermap.org/data/2.5/weather?';
     var second_URL = 'https://api.openweathermap.org/data/2.5/forecast?';
     var currentContainer = $('#current-weather');
+    var fiveDaysContainer = $('');
 
     //WHEN I search for a city
     searchForm.submit(function (event) {
@@ -60,25 +61,49 @@ $(document).ready(function () {
                 currentContainer.append(cityTempDiv);
                 currentContainer.append(cityhumidityDiv);
                 currentContainer.append(citywindDiv);
-                
+
             });
 
     }
 
     // API is connected
 
-    function searchForFiveDayForcast (city) {
+    function searchForFiveDayForcast(city) {
         var forcast_URL = second_URL + "q=" + city + "&appid=" + apiKey;
-        fetch(forcast_URL).then(function(response) {
+        fetch(forcast_URL).then(function (response) {
             return response.json()
-        }).then(function(data){
+        }).then(function (data) {
             console.log("5 Day Forcast ", data);
-            var nextFive = [];
-            for (var i = 0; i < data.list.length; i++)
-            {
-                
+            
+            for (var i = 0; i < data.list.length; i++) {
+                var isThree = data.list[i].dt_txt.search('15:00:00');
+                var cityName = data.city.name;
+                if (isThree > -1) {
+                    var forcast = data.list[i];
+                    var temp = forcast.main.temp;
+                    var weather = forcast.weather;
+                    var wind = forcast.wind;
+                    var humidity = forcast.main.humidity;
+                    console.log(forcast, temp, humidity, weather, wind, cityName)
+                    var cityNameDiv = $('<div class="city-name">');
+                    var cityTempDiv = $('<div class="temp-name">');
+                    var cityhumidityDiv = $('<div class="humidity-name">');
+                    var cityweatherDiv = $('<div class="weather-name">');
+                    var citywindDiv = $('<div class="wind-name">');
+                    
+                    cityNameDiv.text("City: " + cityName);
+                    cityTempDiv.text("Temperature: " + temp + " F");
+                    cityhumidityDiv.text("Humidity: " + humidity + "%");
+                    citywindDiv.text("Wind Speed: " + wind.speed + " MPH"); \
+
+                    fiveDaysContainer.append(cityNameDiv);
+                    fiveDaysContainer.append(cityTempDiv);
+                    fiveDaysContainer.append(cityhumidityDiv);
+                    fiveDaysContainer.append(citywindDiv);
+
+                }
             }
-        })
+        });
         // WHEN I view future weather conditions for that city <br>
         // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
     }

@@ -5,8 +5,8 @@ $(document).ready(function () {
     var apiKey = '';
     var first_URL = 'https://api.openweathermap.org/data/2.5/weather?';
     var second_URL = 'https://api.openweathermap.org/data/2.5/forecast?';
-    var first_IconURL = 'http://openweathermap.org/img/w/01d.png';
-    var second_IconURL = 'https://';
+    var first_IconURL = '';
+    
     var currentWeatherContainer = $('#current-weather');
     var fiveDayWeatherContainer = $('#five-day-weather-forecast');
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
                 var weatherDiv = $('<img class="icon-name">');
                 var windDiv = $('<div class="wind-name">');
                 nameDiv.text("City: " + cityName);
-                weatherDiv.attr('src', iconURL)
+                weatherDiv.attr('src', iconURL);
                 tempDiv.text("Temperature: " + temp + " F");
                 humidityDiv.text("Humidity: " + humidity + "%");
                 windDiv.text("Wind Speed: " + wind.speed + " MPH");

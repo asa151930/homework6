@@ -2,7 +2,7 @@
 $(document).ready(function () {
     var searchHistoryOfContainer = $('#prev-search');
     var searchForm = $('#search-form');
-    var apiKey = '';
+    var apiKey = '564ecbbf68c5305bd1631046fcfc2982';
     var first_URL = 'https://api.openweathermap.org/data/2.5/weather?';
     var second_URL = 'https://api.openweathermap.org/data/2.5/forecast?';
     var first_IconURL = '';

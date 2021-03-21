@@ -2,8 +2,9 @@
 $(document).ready(function () {
     var searchHistoryOfContainer = $('#prev-search');
     var searchForm = $('#search-form');
-    var apiKey = '';
-    var baseURL = 'https://api.openweathermap.org/data/2.5/weather?';
+    var apiKey = '564ecbbf68c5305bd1631046fcfc2982';
+    var first_URL = 'https://api.openweathermap.org/data/2.5/weather?';
+    var second_URL = 'https://api.openweathermap.org/data/2.5/forecast?';
     var currentContainer = $('#current-weather');
 
     //WHEN I search for a city
@@ -20,14 +21,15 @@ $(document).ready(function () {
         searchHistoryOfContainer.append(searchTermDiv);
         console.log(formValues, city);
         // Real value received from form submission
-        searchForUserInput(city);
+        searchForUserInput(city); // call for current weather
+        searchForFiveDayForcast(city) // call for future weather list
 
     });
 
 
     function searchForUserInput(city) {
-        var fullURL = baseURL + "q=" + city + "&appid=" + apiKey;
-        console.log(baseURL);
+        var fullURL = first_URL + "q=" + city + "&appid=" + apiKey;
+        console.log(first_URL);
 
         //WHEN I view current weather conditions for that city <br>
         //THEN I am presented with the city name, the date, an icon representation of 
@@ -66,6 +68,18 @@ $(document).ready(function () {
     // API is connected
 
     function searchForFiveDayForcast (city) {
-
+        var forcast_URL = second_URL + "q=" + city + "&appid=" + apiKey;
+        fetch(forcast_URL).then(function(response) {
+            return response.json()
+        }).then(function(data){
+            console.log("5 Day Forcast ", data);
+            var nextFive = [];
+            for (var i = 0; i < data.list.length; i++)
+            {
+                
+            }
+        })
+        // WHEN I view future weather conditions for that city <br>
+        // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
     }
 });
